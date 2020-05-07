@@ -1,2 +1,2 @@
 # lnk-2-demxml
-Convert shortcuts (LNK) to Dynamic Environment Manager (XML) configuration files.
+Create Dynamic Environment Manager (XML) configuration files based on existing shortcuts (LNK).
