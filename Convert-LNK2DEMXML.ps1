@@ -9,6 +9,16 @@
 #>
 
 Function Get-Folder($Description, $initialDirectory)
+
+	<#
+		.SYNOPSIS
+			This function shows a folder browser dialog and outputs the selection to the console or a variable.
+		
+		.EXAMPLE
+			Get-Folder "Your description goes here" "C:\Windows\System32"
+		
+	#>
+	
 	{
 		[System.Reflection.Assembly]::LoadWithPartialName("System.windows.forms") | Out-Null
 		
