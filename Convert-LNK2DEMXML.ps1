@@ -55,6 +55,20 @@ ForEach ($Item in $startPath)
 		
 		$object = New-Object PSObject -Property $Properties
 		
+		If ($Item.DirectoryName -ne $inPath)
+			{
+				$newFolders = ($Item.DirectoryName).Replace("$inPath\","")
+			}
+		Else
+			{
+				$newFolders = ($Item.DirectoryName).Replace("$inPath","")
+			}
+
+		If ($newFolders -ne "")
+			{
+				New-Item -ItemType Directory -Path "$outPath\$newFolders" -Force | Out-Null
+			}
+		
 		$xmlName = ($object.ShortcutName).Replace(".lnk",".xml")
 		$shortcutName = ($object.ShortcutName).Replace(".lnk","")
 		$targetPath = $object.Target
@@ -68,7 +82,7 @@ ForEach ($Item in $startPath)
 		
 		Write-Host "Creating VMware Dynamic Environment Manager shortcut XML for: $shortcutName"
 		
-		$XmlWriter = [System.XML.XmlWriter]::Create("$outPath\$xmlName")
+		$XmlWriter = [System.XML.XmlWriter]::Create("$outPath\$newFolders\$xmlName")
 		$xmlWriter.WriteStartDocument()
 		$xmlWriter.WriteStartElement("userEnvironmentSettings")
 		$xmlWriter.WriteStartElement("setting")
@@ -106,6 +120,8 @@ ForEach ($Item in $startPath)
 		$xmlWriter.WriteEndDocument()
 		$xmlWriter.Flush()
 		$xmlWriter.Close()
+		
+		$newFolders = ""
 	}
 
 [Runtime.InteropServices.Marshal]::ReleaseComObject($Shell) | Out-Null
