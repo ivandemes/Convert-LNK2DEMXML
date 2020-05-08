@@ -1,8 +1,8 @@
 # Convert-LNK2DEMXML
-## Description
+#### Description
 Create VMware Dynamic Environment Manager (XML) configuration files based on existing shortcuts (LNK).
 
-## Getting started
+#### Getting started
 Open PowerShell and run the following script.
 
 ```powershell
