@@ -49,6 +49,7 @@ ForEach ($Item in $StartMenu)
 					Target = $Shell.CreateShortcut($Item).targetpath
 					Arguments = $Shell.CreateShortcut($Item).arguments
 					WorkingDirectory = $Shell.CreateShortcut($Item).workingdirectory
+					WindowStyle = $Shell.CreateShortcut($Item).windowstyle
 					IconLocation = $Shell.CreateShortcut($Item).iconlocation
 				}
 		
@@ -59,6 +60,7 @@ ForEach ($Item in $StartMenu)
 		$targetPath = $object.Target
 		$targetPathArguments = $object.arguments
 		$workingDirectory = $object.workingdirectory
+		$windowStyle = $object.windowstyle
 		$iconLocationWithIndex = $object.IconLocation
 		$iconIndexSplit = $iconLocationWithIndex.Split(",")
 		$iconLocation = $iconIndexSplit[0]
@@ -79,7 +81,7 @@ ForEach ($Item in $StartMenu)
 				$xmlWriter.WriteAttributeString("args","$targetPathArguments")
 			}
 		
-		$xmlWriter.WriteAttributeString("showCmd","1")
+		$xmlWriter.WriteAttributeString("showCmd","$windowStyle")
 		
 		If ($iconLocationWithIndex.Substring(0,1) -eq ",")
 			{
