@@ -24,7 +24,7 @@ Select the target folder where you want to save the DEM XML files.
 
 ![Select the target folder where you want to save the DEM XML files.](https://www.ivandemes.com/wp-content/uploads/2020/05/Convert-LNK2DEMXML_Target.png)
 
-Copy the XML files to your DEM configuration share (one by one, or all in once).
+Copy the XML files to your DEM configuration share (one by one, or all in one).
 
 ![Copy the XML files to your DEM configuration share (one by one, or all in once).](https://www.ivandemes.com/wp-content/uploads/2020/05/Convert-LNK2DEMXML_Result.png)
 
