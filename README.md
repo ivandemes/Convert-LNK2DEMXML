@@ -30,4 +30,4 @@ Copy the XML files to your DEM configuration share (one by one, or all in once).
 
 The location you want to copy the DEM XML files to is typically something like *\\\\server\demconfigshare$\general\FlexRepository\Shortcut*.
 
-I recommend to test the shortcuts in a test or acceptance environment first, before putting in them in production.
+:warning: I recommend to test the shortcuts in a test or acceptance environment first, before putting in them in production.
