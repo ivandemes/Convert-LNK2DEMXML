@@ -48,6 +48,7 @@ ForEach ($Item in $StartMenu)
 					ShortcutName = $Item.Name
 					Target = $Shell.CreateShortcut($Item).targetpath
 					Arguments = $Shell.CreateShortcut($Item).arguments
+					WorkingDirectory = $Shell.CreateShortcut($Item).workingdirectory
 					IconLocation = $Shell.CreateShortcut($Item).iconlocation
 				}
 		
@@ -57,12 +58,13 @@ ForEach ($Item in $StartMenu)
 		$shortcutName = ($object.ShortcutName).Replace(".lnk","")
 		$targetPath = $object.Target
 		$targetPathArguments = $object.arguments
+		$workingDirectory = $object.workingdirectory
 		$iconLocationWithIndex = $object.IconLocation
 		$iconIndexSplit = $iconLocationWithIndex.Split(",")
 		$iconLocation = $iconIndexSplit[0]
 		$iconIndex = $iconIndexSplit[1]
 		
-		Write-Host "Creating Dynamic Environment Manager shortcut XML for: $shortcutName"
+		Write-Host "Creating VMware Dynamic Environment Manager shortcut XML for: $shortcutName"
 		
 		$XmlWriter = [System.XML.XmlWriter]::Create("$outPath\$xmlName")
 		$xmlWriter.WriteStartDocument()
@@ -90,6 +92,12 @@ ForEach ($Item in $StartMenu)
 		
 		$xmlWriter.WriteAttributeString("iconIndex","$iconIndex")
 		$xmlWriter.WriteAttributeString("programsMenu","")
+		
+		If ($workingDirectory -ne "")
+			{
+				$xmlWriter.WriteAttributeString("startIn","$workingDirectory")
+			}
+		
 		$xmlWriter.WriteAttributeString("async","1")
 		$xmlWriter.WriteEndElement()
 		$xmlWriter.WriteEndElement()
