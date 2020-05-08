@@ -1,8 +1,8 @@
 <#
 	.SYNOPSIS
-		This script converts shortcuts (LNK files) from a selected folder to
-		VMware Dynamic Environment Manager XML configuration files that are
-		saved in a selected folder.
+		This script converts shortcuts (LNK files)  from a selected folder (recursively) to
+		VMware Dynamic Environment Manager XML configuration files that are saved in a
+		selected folder.
 	
 	.EXAMPLE
 		Convert-LNK2DEMXML.ps1
