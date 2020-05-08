@@ -39,9 +39,9 @@ Clear-Host
 $inPath = Get-Folder "Select the SOURCE folder that contains the shortcuts." "$Env:ProgramData\Microsoft\Windows\Start Menu\Programs"
 $outPath = Get-Folder "Select the TARGET folder where the XML files will be saved." "C:\"
 
-$StartMenu = Get-ChildItem $inPath -Recurse -Include *.lnk
+$startPath = Get-ChildItem $inPath -Recurse -Include *.lnk
 
-ForEach ($Item in $StartMenu)
+ForEach ($Item in $startPath)
 	{
 		$Shell = New-Object -ComObject WScript.Shell
 		$Properties = @{
