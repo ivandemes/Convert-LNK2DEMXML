@@ -28,6 +28,6 @@ Copy the XML files to your DEM configuration share (one by one, or all in once).
 
 ![Copy the XML files to your DEM configuration share (one by one, or all in once).](https://www.ivandemes.com/wp-content/uploads/2020/05/Convert-LNK2DEMXML_Result.png)
 
-The location you want to copy the DEM XML files to is typically something like *\\server\demconfigshare$\general\FlexRepository\Shortcut*.
+The location you want to copy the DEM XML files to is typically something like *\\\\server\demconfigshare$\general\FlexRepository\Shortcut*.
 
 I recommend to test the shortcuts in a test or acceptance environment first, before putting in them in production.
