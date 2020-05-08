@@ -1,11 +1,11 @@
 <#
 	.SYNOPSIS
-		An example function to display how help should be written.
+		This script converts shortcuts (LNK files) from a selected folder to
+		VMware Dynamic Environment Manager XML configuration files that are
+		saved in a selected folder.
 	
 	.EXAMPLE
-		Get-Help -Name Test-Help
-	
-	This shows the help for the example function.
+		Convert-LNK2DEMXML.ps1
 #>
 
 Function Get-Folder($Description, $initialDirectory)
@@ -16,7 +16,6 @@ Function Get-Folder($Description, $initialDirectory)
 		
 		.EXAMPLE
 			Get-Folder "Your description goes here" "C:\Windows\System32"
-		
 	#>
 	
 	{
