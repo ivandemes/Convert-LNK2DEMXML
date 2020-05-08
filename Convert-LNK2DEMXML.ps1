@@ -1,4 +1,23 @@
+<#
+	.SYNOPSIS
+		This script converts shortcuts (LNK files) from a selected folder to
+		VMware Dynamic Environment Manager XML configuration files that are
+		saved in a selected folder.
+	
+	.EXAMPLE
+		Convert-LNK2DEMXML.ps1
+#>
+
 Function Get-Folder($Description, $initialDirectory)
+
+	<#
+		.SYNOPSIS
+			This function shows a folder browser dialog and outputs the selection to the console or a variable.
+		
+		.EXAMPLE
+			Get-Folder "Your description goes here" "C:\Windows\System32"
+	#>
+	
 	{
 		[System.Reflection.Assembly]::LoadWithPartialName("System.windows.forms") | Out-Null
 		
@@ -25,18 +44,19 @@ $StartMenu = Get-ChildItem $inPath -Recurse -Include *.lnk
 ForEach ($Item in $StartMenu)
 	{
 		$Shell = New-Object -ComObject WScript.Shell
-		$Properties = @
-			{
-				ShortcutName = $Item.Name
-				Target = $Shell.CreateShortcut($Item).targetpath
-				IconLocation = $Shell.CreateShortcut($Item).iconlocation
-			}
+		$Properties = @{
+					ShortcutName = $Item.Name
+					Target = $Shell.CreateShortcut($Item).targetpath
+					Arguments = $Shell.CreateShortcut($Item).arguments
+					IconLocation = $Shell.CreateShortcut($Item).iconlocation
+				}
 		
 		$object = New-Object PSObject -Property $Properties
 		
 		$xmlName = ($object.ShortcutName).Replace(".lnk",".xml")
 		$shortcutName = ($object.ShortcutName).Replace(".lnk","")
 		$targetPath = $object.Target
+		$targetPathArguments = $object.arguments
 		$iconLocationWithIndex = $object.IconLocation
 		$iconIndexSplit = $iconLocationWithIndex.Split(",")
 		$iconLocation = $iconIndexSplit[0]
@@ -51,6 +71,12 @@ ForEach ($Item in $StartMenu)
 		$xmlWriter.WriteAttributeString("type","shortcut")
 		$xmlWriter.WriteAttributeString("lnk","$shortcutName")
 		$xmlWriter.WriteAttributeString("path","$targetPath")
+		
+		If ($targetPathArguments -ne "")
+			{
+				$xmlWriter.WriteAttributeString("args","$targetPathArguments")
+			}
+		
 		$xmlWriter.WriteAttributeString("showCmd","1")
 		
 		If ($iconLocationWithIndex.Substring(0,1) -eq ",")
