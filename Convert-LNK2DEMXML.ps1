@@ -1,17 +1,21 @@
 <#
-	.SYNOPSIS
+	.DESCRIPTION
 		This script converts shortcuts (LNK files)  from a selected folder (recursively) to
 		VMware Dynamic Environment Manager XML configuration files that are saved in a
 		selected folder.
 	
 	.EXAMPLE
 		Convert-LNK2DEMXML.ps1
+		
+	.NOTES
+		Version	: 0.3
+		Author	: Ivan de Mes
 #>
 
 Function Get-Folder($Description, $initialDirectory)
 
 	<#
-		.SYNOPSIS
+		.DESCRIPTION
 			This function shows a folder browser dialog and outputs the selection to the console or a variable.
 		
 		.EXAMPLE
