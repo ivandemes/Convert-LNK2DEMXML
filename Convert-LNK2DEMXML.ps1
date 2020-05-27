@@ -8,8 +8,9 @@
 		Convert-LNK2DEMXML.ps1
 		
 	.NOTES
-		Version	: 0.3
+		Version	: 0.4
 		Author	: Ivan de Mes
+		Website	: https://www.ivandemes.com
 #>
 
 Function Get-Folder($Description, $initialDirectory)
@@ -40,8 +41,38 @@ Function Get-Folder($Description, $initialDirectory)
 
 Clear-Host
 
+# Display important notice and ask for reaction
+[System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null
+$varNoticeReaction=[System.Windows.Forms.MessageBox]::Show("The content of the VMware Dynamic Environment Manager (DEM) XML files created by this script is the same as the content of the DEM XML files created by DEM. However, DEM XML files created outside DEM are not officially supported by VMware.`n`nPress OK to acknowledge this notice, or press CANCEL to exit this script.","Important Notice",[System.Windows.Forms.MessageBoxButtons]::OKCancel,64)
+Switch ($varNoticeReaction)
+	{
+		"OK"		{
+					Write-Host "`nYou have acknowledged the important notice.`n"
+				}
+				
+		"Cancel"	{
+					Write-Host "`nYou have canceled the script.`n"
+					Start-Sleep -Seconds 2
+					Exit
+				}
+	}
+
+
 $inPath = Get-Folder "Select the SOURCE folder that contains the shortcuts." "$Env:ProgramData\Microsoft\Windows\Start Menu\Programs"
+If ($inPath -eq $null)
+	{
+		Write-Host "`nYou did not specify a SOURCE folder. This script will now exit.`n"
+		Start-Sleep -Seconds 2
+		Exit
+	}
+	
 $outPath = Get-Folder "Select the TARGET folder where the XML files will be saved." "C:\"
+If ($outPath -eq $null)
+	{
+		Write-Host "`nYou did not specify a TARGET folder. This script will now exit.`n"
+		Start-Sleep -Seconds 2
+		Exit
+	}
 
 $startPath = Get-ChildItem $inPath -Recurse -Include *.lnk
 
@@ -55,6 +86,7 @@ ForEach ($Item in $startPath)
 					WorkingDirectory = $Shell.CreateShortcut($Item).workingdirectory
 					WindowStyle = $Shell.CreateShortcut($Item).windowstyle
 					IconLocation = $Shell.CreateShortcut($Item).iconlocation
+					Description = $Shell.CreateShortcut($Item).description
 				}
 		
 		$object = New-Object PSObject -Property $Properties
@@ -83,6 +115,7 @@ ForEach ($Item in $startPath)
 		$iconIndexSplit = $iconLocationWithIndex.Split(",")
 		$iconLocation = $iconIndexSplit[0]
 		$iconIndex = $iconIndexSplit[1]
+		$comment = $object.description
 		
 		Write-Host "Creating VMware Dynamic Environment Manager shortcut XML for: $shortcutName"
 		
@@ -119,6 +152,7 @@ ForEach ($Item in $startPath)
 			}
 		
 		$xmlWriter.WriteAttributeString("async","1")
+		$xmlWriter.WriteAttributeString("comment","$comment")
 		$xmlWriter.WriteEndElement()
 		$xmlWriter.WriteEndElement()
 		$xmlWriter.WriteEndDocument()
