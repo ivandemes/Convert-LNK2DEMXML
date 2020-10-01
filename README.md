@@ -14,7 +14,7 @@ Open PowerShell and run the following script.
 
 Right-click the script in Windows Explorer and click *Run with PowerShell*.
 
-![Right-click the script in Windows Explorer and click "Run with PowerShell".](https://www.ivandemes.com/wp-content/uploads/2020/05/explorer_convert_lnk2demxml.png)
+![Right-click the script in Windows Explorer and click "Run with PowerShell".](https://www.ivandemes.com/images/bulk-convert-shortcuts-to-dynamic-environment-manager/explorer_convert_lnk2demxml.png)
 
 Read the important notice and click *OK* to acknowledge the message or press *Cancel* to exit the script.
 
