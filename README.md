@@ -18,8 +18,6 @@ Right-click the script in Windows Explorer and click *Run with PowerShell*.
 
 Read the important notice and click *OK* to acknowledge the message or press *Cancel* to exit the script.
 
-![Read the important notice and click "OK" to acknowledge the message or press "Cancel" to exit the script.](https://www.ivandemes.com/wp-content/uploads/2020/05/Convert-LNK2DEMXML_Important_Notice.png)
-
 Select the source folder that contains the shortcuts (LNK files) you want to convert.
 
 ![Select the source folder that contains the shortcuts (LNK files) you want to convert.](https://www.ivandemes.com/images/bulk-convert-shortcuts-to-dynamic-environment-manager/Convert-LNK2DEMXML_Source.png)
